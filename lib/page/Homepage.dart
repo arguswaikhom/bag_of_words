@@ -67,22 +67,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   _onPressedAddWord(final String word) async {
+    final MessageUtils msgUtils = MessageUtils(context);
     if (word == null || word.trim().isEmpty) {
-      MessageUtils(context).showSLightCenterToast(AppString.enterAWord);
+      msgUtils.showSLightCenterToast(AppString.enterAWord);
       return;
     }
 
     final wordCount = word.split(" ").length;
     if (wordCount > 1) {
-      MessageUtils(context)
-          .showSLightCenterToast(AppString.searchSingleWordOnly);
+      msgUtils.showSLightCenterToast(AppString.searchSingleWordOnly);
       return;
     }
 
     final def = await _controller.fetchDefinition(word, true);
     if (def == null) {
-      MessageUtils(context)
-          .showSLightCenterToast(AppString.failedToGetDefinition);
+      msgUtils.showSLightCenterToast(AppString.failedToGetDefinition);
       return;
     }
 

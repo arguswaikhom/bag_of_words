@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         }
 
         final isAuthenticated = snapshot.data;
-        if (isAuthenticated) return HomePage();
+        if (isAuthenticated != null && isAuthenticated) return HomePage();
         return LoginPage();
       },
     );
