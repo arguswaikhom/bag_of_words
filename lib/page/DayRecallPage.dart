@@ -13,8 +13,8 @@ class DayRecallPage extends StatefulWidget {
   final DayStat dayStat;
 
   const DayRecallPage({
-    Key key,
-    @required this.dayStat,
+    Key? key,
+    required this.dayStat,
   }) : super(key: key);
 
   @override
@@ -42,7 +42,7 @@ class _DayRecallPageState extends State<DayRecallPage> {
     final words = this.dayStat.words;
     return ListView.builder(
       physics: BouncingScrollPhysics(),
-      itemCount: words.length + 1,
+      itemCount: words!.length + 1,
       itemBuilder: (context, index) {
         if (index == 0) return _getListViewHeader();
         return _getWordWidget(words[index - 1]);
@@ -107,7 +107,7 @@ class _DayRecallPageState extends State<DayRecallPage> {
                   width: 12,
                 ),
                 Text(
-                  wordObj.word,
+                  wordObj.word!,
                   style: TextStyle(fontSize: 16, color: AppColor.wordDefColor),
                 ),
                 Expanded(child: Container()),
@@ -140,8 +140,7 @@ class _DayRecallPageState extends State<DayRecallPage> {
                   wordObj.isProgressing = !wordObj.isProgressing;
                 });
                 if (def == null) {
-                  MessageUtils(context)
-                      .showSToast(AppString.failedToGetDefinition);
+                  // MessageUtils(context).showSToast(AppString.failedToGetDefinition);
                   return;
                 }
 
@@ -171,7 +170,7 @@ class _DayRecallPageState extends State<DayRecallPage> {
                         height: 10,
                       ),
                       DefinitionWidget(
-                        definition: wordObj.def,
+                        definition: wordObj.def!,
                         margin: EdgeInsets.zero,
                         padding: EdgeInsets.zero,
                         showWord: false,

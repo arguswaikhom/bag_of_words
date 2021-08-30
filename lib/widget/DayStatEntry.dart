@@ -3,14 +3,15 @@ import 'package:bag_of_words/res/AppStyle.dart';
 import 'package:flutter/material.dart';
 
 class DayStatEntry extends StatelessWidget {
-  final Function onTap;
+  final void Function() onTap;
   final count;
   final String label;
+
   const DayStatEntry({
-    Key key,
+    Key? key,
     this.count,
-    @required this.onTap,
-    @required this.label,
+    required this.onTap,
+    required this.label,
   }) : super(key: key);
 
   @override

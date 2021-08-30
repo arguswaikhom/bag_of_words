@@ -4,10 +4,10 @@ import 'package:bag_of_words/model/Phonetic.dart';
 import 'package:bag_of_words/model/Sense.dart';
 
 class Definition {
-  String word;
-  String origin;
-  List<Phonetic> phonetics;
-  List<Sense> senses;
+  String? word;
+  String? origin;
+  List<Phonetic>? phonetics;
+  List<Sense>? senses;
 
   Definition({
     this.word,
@@ -16,7 +16,7 @@ class Definition {
     this.senses,
   });
 
-  factory Definition.fromMap(Map<String, dynamic> map) {
+  static Definition? fromMap(Map<String, dynamic>? map) {
     if (map == null) return null;
 
     return Definition(
@@ -28,15 +28,15 @@ class Definition {
     );
   }
 
-  factory Definition.fromJson(String source) =>
+  static Definition? fromJson(String source) =>
       Definition.fromMap(json.decode(source));
 
   Map<String, dynamic> toMap() {
     return {
       'word': word,
       'origin': origin,
-      'phonetics': phonetics?.map((x) => x?.toMap())?.toList(),
-      'senses': senses?.map((x) => x?.toMap())?.toList(),
+      'phonetics': phonetics?.map((x) => x.toMap()).toList(),
+      'senses': senses?.map((x) => x.toMap()).toList(),
     };
   }
 

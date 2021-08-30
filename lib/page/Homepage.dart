@@ -68,20 +68,20 @@ class _HomePageState extends State<HomePage> {
 
   _onPressedAddWord(final String word) async {
     final MessageUtils msgUtils = MessageUtils(context);
-    if (word == null || word.trim().isEmpty) {
-      msgUtils.showSLightCenterToast(AppString.enterAWord);
+    if (word.trim().isEmpty) {
+      // msgUtils.showSLightCenterToast(AppString.enterAWord);
       return;
     }
 
     final wordCount = word.split(" ").length;
     if (wordCount > 1) {
-      msgUtils.showSLightCenterToast(AppString.searchSingleWordOnly);
+      // msgUtils.showSLightCenterToast(AppString.searchSingleWordOnly);
       return;
     }
 
     final def = await _controller.fetchDefinition(word, true);
     if (def == null) {
-      msgUtils.showSLightCenterToast(AppString.failedToGetDefinition);
+      // msgUtils.showSLightCenterToast(AppString.failedToGetDefinition);
       return;
     }
 
@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
           : Future(() => _dataset[2]),
     ]);
     _dataset = responses;
-    return responses;
+    return _dataset;
   }
 
   _displayContentError(final String msg) {
@@ -206,7 +206,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _navDayRecallPage(final DayStat dayStat) {
+  _navDayRecallPage(final DayStat? dayStat) {
     if (dayStat == null || dayStat.total == 0) return;
     Navigator.push(
       context,

@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:bag_of_words/model/Definition.dart';
 
 class DayStatWord {
-  String word;
-  String action;
-  Definition def;
+  String? word;
+  String? action;
+  Definition? def;
   bool isVisible;
   bool isProgressing;
 
@@ -13,18 +13,15 @@ class DayStatWord {
     this.word,
     this.action,
     this.def,
-    this.isVisible,
-    this.isProgressing,
-  }) {
-    if (this.isVisible == null) this.isVisible = false;
-    if (this.isProgressing == null) this.isProgressing = false;
-  }
+    this.isVisible = false,
+    this.isProgressing = false,
+  });
 
   Map<String, dynamic> toMap() {
     return {
       'word': word,
       'action': action,
-      'def': def.toMap(),
+      'def': def?.toMap(),
       'isVisible': isVisible,
       'isProgressing': isProgressing,
     };
@@ -35,7 +32,7 @@ class DayStatWord {
       word: map['word'],
       action: map['action'],
       def: Definition.fromMap(map['def']),
-      isVisible: map['isVisible'],
+      isVisible: map['isVisible'] ?? false,
       isProgressing: map['isProgressing'],
     );
   }

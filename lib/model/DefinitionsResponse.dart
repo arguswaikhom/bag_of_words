@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:bag_of_words/model/Definition.dart';
 
 class DefinitionsResponse {
-  String status;
-  String nextUrl;
-  List<Definition> defs;
+  String? status;
+  String? nextUrl;
+  List<Definition>? defs;
+
   DefinitionsResponse({
     this.status,
     this.nextUrl,
@@ -16,7 +17,7 @@ class DefinitionsResponse {
     return {
       'status': status,
       'nextUrl': nextUrl,
-      'defs': defs?.map((x) => x.toMap())?.toList(),
+      'defs': defs?.map((x) => x.toMap()).toList(),
     };
   }
 

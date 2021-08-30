@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class TextEntryWidget extends StatelessWidget {
   final Function onClickedAdd;
 
-  const TextEntryWidget({@required this.onClickedAdd, Key key})
+  const TextEntryWidget({required this.onClickedAdd, Key? key})
       : super(key: key);
 
   @override

@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'DayStatWord.dart';
 
 class DayStat {
-  int day;
-  int total;
-  int learn;
-  int recall;
-  String uid;
-  String dayStatId;
-  List<DayStatWord> words;
+  int? day;
+  int? total;
+  int? learn;
+  int? recall;
+  String? uid;
+  String? dayStatId;
+  List<DayStatWord>? words;
 
   DayStat({
     this.day,

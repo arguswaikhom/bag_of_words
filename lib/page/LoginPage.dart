@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             onTap: () async {
               await Application.getInstance().signIn();
-              if (await Application.getInstance().isAuthenticated()) {
+              if (Application.getInstance().isAuthenticated()) {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(

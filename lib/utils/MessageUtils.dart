@@ -1,5 +1,5 @@
 import 'package:bag_of_words/res/AppColor.dart';
-import 'package:toast/toast.dart';
+// import 'package:toast/toast.dart';
 
 class MessageUtils {
   final _context;
@@ -7,7 +7,7 @@ class MessageUtils {
   MessageUtils(this._context);
 
   /// Display a short duration toast message
-  showSToast(String msg) {
+  /*showSToast(String msg) {
     Toast.show(msg, _context,
         duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
   }
@@ -27,5 +27,5 @@ class MessageUtils {
   showLToast(String msg) {
     Toast.show(msg, _context,
         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-  }
+  }*/
 }
