@@ -5,7 +5,7 @@ import 'package:bag_of_words/model/DayStat.dart';
 import 'package:bag_of_words/model/DayStatResponse.dart';
 import 'package:bag_of_words/model/Definition.dart';
 import 'package:bag_of_words/model/DefinitionsResponse.dart';
-import 'package:bag_of_words/res/AppString.dart';
+import 'package:bag_of_words/res/app_string.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,6 +30,7 @@ class HomePageController {
   Future<DayStat?> fetchDayStat(final String day) async {
     User user = Application.getInstance().getFirebaseUser()!;
     final String url = AppString.apiDayStat + "${user.uid}/" + day;
+    print(url);
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       Map<String, dynamic> resMap = json.decode(response.body);

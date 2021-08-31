@@ -2,7 +2,7 @@ import 'package:bag_of_words/controller/Application.dart';
 import 'package:bag_of_words/page/Homepage.dart';
 import 'package:bag_of_words/page/LoginPage.dart';
 import 'package:bag_of_words/res/AppColor.dart';
-import 'package:bag_of_words/res/AppString.dart';
+import 'package:bag_of_words/res/app_string.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
