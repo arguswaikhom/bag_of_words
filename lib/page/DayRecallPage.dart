@@ -2,7 +2,7 @@ import 'package:bag_of_words/controller/HomePageController.dart';
 import 'package:bag_of_words/model/DayStat.dart';
 import 'package:bag_of_words/model/DayStatWord.dart';
 import 'package:bag_of_words/model/Definition.dart';
-import 'package:bag_of_words/res/AppColor.dart';
+import 'package:bag_of_words/res/app_color.dart';
 import 'package:bag_of_words/res/app_string.dart';
 import 'package:bag_of_words/utils/MessageUtils.dart';
 import 'package:bag_of_words/widget/CircleWidget.dart';

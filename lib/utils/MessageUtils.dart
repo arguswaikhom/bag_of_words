@@ -1,4 +1,4 @@
-import 'package:bag_of_words/res/AppColor.dart';
+import 'package:bag_of_words/res/app_color.dart';
 // import 'package:toast/toast.dart';
 
 class MessageUtils {

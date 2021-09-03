@@ -1,6 +1,6 @@
 import 'package:bag_of_words/model/Definition.dart';
 import 'package:bag_of_words/model/Sense.dart';
-import 'package:bag_of_words/res/AppColor.dart';
+import 'package:bag_of_words/res/app_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
