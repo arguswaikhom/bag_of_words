@@ -1,6 +1,6 @@
 import 'package:bag_of_words/model/Definition.dart';
 import 'package:bag_of_words/model/Sense.dart';
-import 'package:bag_of_words/res/AppColor.dart';
+import 'package:bag_of_words/res/app_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
@@ -12,11 +12,11 @@ class DefinitionWidget extends StatelessWidget {
   final showWord;
 
   const DefinitionWidget({
-    @required this.definition,
+    required this.definition,
     this.showWord: true,
     this.margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
     this.padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -45,7 +45,7 @@ class DefinitionWidget extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 4),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    definition.word,
+                    definition.word!,
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -61,7 +61,7 @@ class DefinitionWidget extends StatelessWidget {
   }
 
   _getPhoneticWidgets() {
-    if (definition.phonetics.length == 0) {
+    if (definition.phonetics?.length == 0) {
       return Container();
     }
 
@@ -71,7 +71,7 @@ class DefinitionWidget extends StatelessWidget {
       decoration: BoxDecoration(color: AppColor.wordWidgetBg),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: definition.phonetics.length,
+        itemCount: definition.phonetics!.length,
         itemBuilder: (context, index) {
           return InkWell(
             child: Container(
@@ -88,7 +88,7 @@ class DefinitionWidget extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    definition.phonetics[index].phonetic,
+                    definition.phonetics![index].phonetic!,
                     style: TextStyle(color: AppColor.wordPhoneticColor),
                   ),
                   Icon(
@@ -101,7 +101,7 @@ class DefinitionWidget extends StatelessWidget {
             ),
             onTap: () async {
               final player = AudioPlayer();
-              await player.setUrl(definition.phonetics[index].audio);
+              await player.setUrl(definition.phonetics![index].audio!);
               player.play();
             },
           );
@@ -111,16 +111,16 @@ class DefinitionWidget extends StatelessWidget {
   }
 
   _getSenseWidgets() {
-    if (definition.senses.length == 0) {
+    if (definition.senses?.length == 0) {
       return Container();
     }
 
     return ListView.builder(
       shrinkWrap: true,
       physics: ClampingScrollPhysics(),
-      itemCount: definition.senses.length > 2 ? 2 : definition.senses.length,
+      itemCount: definition.senses!.length > 2 ? 2 : definition.senses!.length,
       itemBuilder: (context, index) {
-        Sense sense = definition.senses[index];
+        Sense sense = definition.senses![index];
         return Container(
           margin: EdgeInsets.only(bottom: 16),
           decoration: BoxDecoration(
@@ -140,13 +140,13 @@ class DefinitionWidget extends StatelessWidget {
                 padding: EdgeInsets.all(8),
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  sense.definition,
+                  sense.definition!,
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: AppColor.wordDefColor),
                 ),
               ),
-              _getExamples(sense.examples)
+              _getExamples(sense.examples!)
             ],
           ),
         );

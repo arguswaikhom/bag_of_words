@@ -1,8 +1,8 @@
 import 'package:bag_of_words/controller/Application.dart';
 import 'package:bag_of_words/page/Homepage.dart';
 import 'package:bag_of_words/res/AppAsset.dart';
-import 'package:bag_of_words/res/AppColor.dart';
-import 'package:bag_of_words/res/AppString.dart';
+import 'package:bag_of_words/res/app_color.dart';
+import 'package:bag_of_words/res/app_string.dart';
 import 'package:bag_of_words/widget/CircleWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             onTap: () async {
               await Application.getInstance().signIn();
-              if (await Application.getInstance().isAuthenticated()) {
+              if (Application.getInstance().isAuthenticated()) {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(

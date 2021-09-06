@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 class Phonetic {
-  String phonetic;
-  String audio;
+  String? phonetic;
+  String? audio;
 
   Phonetic({
     this.phonetic,
     this.audio,
   });
 
-  factory Phonetic.fromMap(Map<String, dynamic> map) {
+  static Phonetic? fromMap(Map<String, dynamic>? map) {
     if (map == null) return null;
 
     return Phonetic(
@@ -18,7 +18,7 @@ class Phonetic {
     );
   }
 
-  factory Phonetic.fromJson(String source) =>
+  static Phonetic? fromJson(String source) =>
       Phonetic.fromMap(json.decode(source));
 
   Map<String, dynamic> toMap() {

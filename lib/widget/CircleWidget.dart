@@ -6,7 +6,7 @@ class CircleWidget extends StatelessWidget {
   final margin;
 
   const CircleWidget({
-    Key key,
+    Key? key,
     @required this.color,
     @required this.diameter,
     this.margin: EdgeInsets.zero,

@@ -4,28 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Application {
-  static Application _instance;
+  static Application? _instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  static Application getInstance() {
-    if (_instance == null) return Application();
-    return _instance;
-  }
+  static Application getInstance() => _instance ?? Application();
 
-  isAuthenticated() async {
-    FirebaseUser fireCurrentUser = await _auth.currentUser();
-    return fireCurrentUser != null;
-  }
+  bool isAuthenticated() => _auth.currentUser != null;
 
-  getFirebaseUser() async {
-    return await _auth.currentUser();
-  }
+  User? getFirebaseUser() => _auth.currentUser;
 
   signIn() async {
-    GoogleSignInAccount googleAccount = await _googleSignIn.signIn();
-    GoogleSignInAuthentication gSignInAuth = await googleAccount.authentication;
-    AuthCredential credential = GoogleAuthProvider.getCredential(
+    GoogleSignInAccount? googleAccount = await _googleSignIn.signIn();
+    GoogleSignInAuthentication gSignInAuth =
+        await googleAccount!.authentication;
+    AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: gSignInAuth.accessToken,
       idToken: gSignInAuth.idToken,
     );
