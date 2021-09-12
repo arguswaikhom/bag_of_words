@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class DayStatEntry extends StatelessWidget {
   final void Function() onTap;
-  final count;
+  final String? count;
   final String label;
 
   const DayStatEntry({

@@ -3,9 +3,9 @@ import 'package:bag_of_words/bloc/auth/auth_state.dart';
 import 'package:bag_of_words/res/app_color.dart';
 import 'package:bag_of_words/res/app_string.dart';
 import 'package:bag_of_words/utils/extensions/navigator_state_x.dart';
-import 'package:bag_of_words/views/screens/home_screen.dart';
-import 'package:bag_of_words/views/screens/login_screen.dart';
-import 'package:bag_of_words/views/screens/splash_screen.dart';
+import 'package:bag_of_words/views/pages/home_page.dart';
+import 'package:bag_of_words/views/pages/login_page.dart';
+import 'package:bag_of_words/views/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,10 +36,10 @@ class _EntryScreenState extends State<EntryScreen> {
           listener: (context, state) {
             switch (state.status) {
               case AuthStatus.AUTHENTICATED:
-                _navigator.pushAndRemoveAll(HomeScreen.route());
+                _navigator.pushAndRemoveAll(HomePage.route());
                 break;
               case AuthStatus.UNAUTHENTICATED:
-                _navigator.pushAndRemoveAll(LoginScreen.route());
+                _navigator.pushAndRemoveAll(LoginPage.route());
                 break;
               default:
                 break;

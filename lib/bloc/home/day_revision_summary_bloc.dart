@@ -15,17 +15,17 @@ class DayRevisionSummaryBloc
       DayRevisionSummaryFetchEvent event) async* {
     if (event is DayRevisionSummaryFetchEvent) {
       try {
-        final List<DayStat> snapshots = await Future.wait([
+        final List<DayStat?> snapshots = await Future.wait([
           repo.fetchTodaysStat(),
           repo.fetchYesterdaysStat(),
         ]);
 
         yield DayRevisionSummaryState(
-          status: DayRevisionSummaryStatus.SUCCESS,
-          todaysDayStat: snapshots[0],
-          yestDayStat: snapshots[1],
-        );
-      } on Exception {
+            status: DayRevisionSummaryStatus.SUCCESS,
+            todaysDayStat: snapshots[0],
+            yestDayStat: snapshots[1]);
+      } on Exception catch (e) {
+        print(e);
         yield DayRevisionSummaryState(status: DayRevisionSummaryStatus.INITIAL);
       }
     }

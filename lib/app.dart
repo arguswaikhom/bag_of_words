@@ -1,6 +1,6 @@
 import 'package:bag_of_words/bloc/auth/auth_bloc.dart';
 import 'package:bag_of_words/data/repos/auth/auth_repo.dart';
-import 'package:bag_of_words/views/screens/entry_screen.dart';
+import 'package:bag_of_words/views/pages/entry_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

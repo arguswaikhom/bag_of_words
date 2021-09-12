@@ -5,7 +5,7 @@ import 'package:bag_of_words/utils/enums/response_status.dart';
 
 class DayStatResponse {
   ResponseStatus status;
-  DayStat stat;
+  DayStat? stat;
 
   DayStatResponse(this.status, this.stat);
 
@@ -20,14 +20,14 @@ extension DayStatResponseX on DayStatResponse {
   Map<String, dynamic> toMap() {
     return {
       'status': status,
-      'stat': stat.toMap(),
+      'stat': stat?.toMap(),
     };
   }
 
   static DayStatResponse fromMap(Map<String, dynamic> map) {
     return DayStatResponse(
       ResponseStatusX.createFromAnyString(map['status']),
-      DayStat.fromMap(map['stat']),
+      map['stat'] == null ? null : DayStat.fromMap(map['stat']),
     );
   }
 
