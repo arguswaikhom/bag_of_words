@@ -3,14 +3,15 @@ import 'package:bag_of_words/res/app_string.dart';
 import 'package:bag_of_words/utils/enums/response_status.dart';
 import 'package:bag_of_words/utils/exceptions/empty_res_exception.dart';
 import 'package:bag_of_words/utils/exceptions/failed_res_exception.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 class DefsCloudProvider {
-  Future<DefsResponse> fetchLearnedDefinitions({
+  Future<DefsResponse> fetchLearnedDefs({
     final String? url,
-    required final String uid,
+    required final User user,
   }) async {
-    final endpoint = url ?? AppString.apiDefinitions + uid;
+    final String endpoint = url ?? AppString.apiDefinitions + user.uid;
     final res = await http.get(Uri.parse(endpoint));
     if (res.statusCode == 200) {
       final DefsResponse response = DefsResponse.fromJson(res.body);

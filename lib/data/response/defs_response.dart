@@ -17,7 +17,8 @@ class DefsResponse {
   factory DefsResponse.fromMap(Map<String, dynamic> map) =>
       DefsResponseX.fromMap(map);
 
-  factory DefsResponse.fromJson(String source) => DefsResponse.fromJson(source);
+  factory DefsResponse.fromJson(String source) =>
+      DefsResponseX.fromJson(source);
 }
 
 extension DefsResponseX on DefsResponse {
