@@ -34,8 +34,8 @@ extension DayStatWordX on DayStatWord {
 
   static DayStatWord fromMap(Map<String, dynamic> map) {
     return DayStatWord(
-      word: ActionWord.fromMap(map['word']),
-      def: Definition.fromMap(map['def']),
+      word: ActionWord.fromMap(map),
+      def: map['def'] == null ? null : Definition.fromMap(map['def']),
       isDefVisible: map['isDefVisible'] ?? false,
       isDefFetching: map['isDefFetching'] ?? false,
     );

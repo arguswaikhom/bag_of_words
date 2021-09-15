@@ -49,7 +49,7 @@ extension DayStatX on DayStat {
       dayStatId: map['dayStatId'],
       words: words == null
           ? []
-          : List<DayStatWord>.from(words.map((x) => fromMap(x))),
+          : List<DayStatWord>.from(words.map((x) => DayStatWord.fromMap(x))),
     );
   }
 

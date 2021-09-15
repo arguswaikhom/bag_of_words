@@ -27,6 +27,20 @@ class LearnedDefsBloc extends Bloc<LearnedDefsEvent, LearnedDefsState> {
       } on FailedResException {
         yield state.copyWith(status: LearnedDefsStatus.FAILURE);
       }
-    } else if (event is LearnedDefsAddWordEvent) {}
+    } else if (event is LearnedDefsAddSingleDefEvent) {
+      /// If the new definition added is already in the list,
+      /// remove the definition from the list first and
+      /// add it to the top of the list
+      List<Definition> updatedDefs = state.defs.where((element) {
+        return element.word != event.definition.word;
+      }).toList();
+
+      updatedDefs.insert(0, event.definition);
+
+      yield state.copyWith(
+        status: LearnedDefsStatus.SUCCESS,
+        defs: updatedDefs,
+      );
+    }
   }
 }

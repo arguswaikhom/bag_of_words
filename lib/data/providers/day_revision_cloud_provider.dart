@@ -28,7 +28,7 @@ class DayRevisionCloudProvider {
     final User user,
     final bool includeCall,
   ) async {
-    final String query = includeCall ? '?ic=True&uid=${user.uid}}' : '';
+    final String query = includeCall ? '?ic=True&uid=${user.uid}' : '';
     final String url = AppString.apiDefinition + '${word.toLowerCase()}/$query';
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) return Definition.fromJson(response.body);

@@ -1,5 +1,8 @@
 import 'package:bag_of_words/bloc/auth/auth_bloc.dart';
 import 'package:bag_of_words/bloc/auth/auth_state.dart';
+import 'package:bag_of_words/bloc/home/addword/add_word_bloc.dart';
+import 'package:bag_of_words/bloc/home/addword/add_word_event.dart';
+import 'package:bag_of_words/bloc/home/addword/add_work_state.dart';
 import 'package:bag_of_words/bloc/home/day_revision_summary_bloc.dart';
 import 'package:bag_of_words/bloc/home/day_revision_summary_event.dart';
 import 'package:bag_of_words/bloc/home/day_revision_summary_state.dart';
@@ -16,9 +19,7 @@ import 'package:bag_of_words/res/app_string.dart';
 import 'package:bag_of_words/views/pages/login_page.dart';
 import 'package:bag_of_words/views/refhost/learned_defs_ref_host.dart';
 import 'package:bag_of_words/views/reps/day_revision_stat_rep.dart';
-import 'package:bag_of_words/views/reps/learneddefs/learned_defs_initial_loading.dart';
-import 'package:bag_of_words/views/reps/learneddefs/learned_defs_list.dart';
-import 'package:bag_of_words/views/widgets/definition_widget.dart';
+import 'package:bag_of_words/views/widgets/text_entry_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,23 +32,29 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final User user = context.read<AuthRepo>().getAuthenticatedUser();
+
+    final DayRevisionRepo dayRevRepo = DayRevisionRepo(
+      user: user,
+      cloudProvider: DayRevisionCloudProvider(),
+    );
+
+    final LearnedDefsBloc defsBloc = LearnedDefsBloc(
+      DefsRepo(
+        user: user,
+        cloudProvider: DefsCloudProvider(),
+      ),
+    );
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<DayRevisionSummaryBloc>(
-          create: (_) => DayRevisionSummaryBloc(
-            DayRevisionRepo(
-              user: user,
-              cloudProvider: DayRevisionCloudProvider(),
-            ),
-          ),
+          create: (_) => DayRevisionSummaryBloc(dayRevRepo),
         ),
         BlocProvider<LearnedDefsBloc>(
-          create: (_) => LearnedDefsBloc(
-            DefsRepo(
-              user: user,
-              cloudProvider: DefsCloudProvider(),
-            ),
-          ),
+          create: (_) => defsBloc,
+        ),
+        BlocProvider<AddWordBloc>(
+          create: (_) => AddWordBloc(dayRevRepo, defsBloc),
         ),
       ],
       child: HomeScreen(),
@@ -63,27 +70,45 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late DayRevisionSummaryBloc _dayRevSumBloc;
-  late LearnedDefsBloc _learnedDefsBloc;
-
   @override
   void initState() {
     super.initState();
-    _dayRevSumBloc = context.read<DayRevisionSummaryBloc>();
-    _dayRevSumBloc.add(DayRevisionSummaryFetchEvent());
-
-    _learnedDefsBloc = context.read<LearnedDefsBloc>();
-    _learnedDefsBloc.add(LearnedDefsFetchEvent());
+    context.read<DayRevisionSummaryBloc>().add(DayRevisionSummaryFetchEvent());
+    context.read<LearnedDefsBloc>().add(LearnedDefsFetchEvent());
   }
 
   @override
   Widget build(BuildContext context) {
+    final Widget actionBarLoadingWidget =
+        BlocConsumer<AddWordBloc, AddWordState>(
+      builder: (context, state) {
+        if (state.status == AddWordStatus.ADDING) {
+          return Center(
+            child: Container(
+              height: 20.0,
+              width: 20.0,
+              child: CircularProgressIndicator(strokeWidth: 2.0),
+            ),
+          );
+        }
+        return Container();
+      },
+      listener: (context, state) {
+        if (state.status == AddWordStatus.SUCCESS) {
+          context
+              .read<DayRevisionSummaryBloc>()
+              .add(DayRevisionSummaryFetchEvent());
+        }
+      },
+    );
+
     return Scaffold(
       backgroundColor: AppColor.darkBg,
       appBar: AppBar(
         title: Text(AppString.appName),
         elevation: 0,
-        actions: <Widget>[
+        actions: [
+          actionBarLoadingWidget,
           IconButton(
             icon: const Icon(Icons.more_vert_rounded),
             onPressed: () {
@@ -111,41 +136,68 @@ class _HomeScreenState extends State<HomeScreen> {
 class HomeScreenBody extends StatelessWidget {
   const HomeScreenBody({Key? key}) : super(key: key);
 
+  void _onAddNewWord(BuildContext context, String word) {
+    if (word.trim().isEmpty) {
+      // TODO: Empty word addition not allowed
+      return;
+    }
+
+    if (word.split(' ').length > 1) {
+      // TODO: Multiple word search not allowed
+      return;
+    }
+
+    context.read<AddWordBloc>().add(AddWordAddEvent(word: word));
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Widget dayRevWidget =
+        BlocBuilder<DayRevisionSummaryBloc, DayRevisionSummaryState>(
+      builder: (context, state) {
+        return DayRevisionStatRep(
+          todaysDayStat: state.todaysDayStat,
+          yestDayStat: state.yestDayStat,
+        );
+      },
+    );
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: BlocBuilder<DayRevisionSummaryBloc, DayRevisionSummaryState>(
-        builder: (_, dayRevState) {
-          return BlocBuilder<LearnedDefsBloc, LearnedDefsState>(
-            builder: (_, defsState) {
-              if (defsState.defs.isEmpty) {
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 80.0),
+            child: BlocBuilder<LearnedDefsBloc, LearnedDefsState>(
+              builder: (context, state) {
+                if (state.defs.isNotEmpty) {
+                  return SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        dayRevWidget,
+                        LearnedDefsRefHost(state: state),
+                      ],
+                    ),
+                  );
+                }
+
                 return Column(
                   children: [
-                    DayRevisionStatRep(
-                      todaysDayStat: dayRevState.todaysDayStat,
-                      yestDayStat: dayRevState.yestDayStat,
-                    ),
-                    Expanded(child: LearnedDefsRefHost(state: defsState)),
+                    dayRevWidget,
+                    Expanded(child: LearnedDefsRefHost(state: state)),
                   ],
                 );
-              }
-
-              return SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    DayRevisionStatRep(
-                      todaysDayStat: dayRevState.todaysDayStat,
-                      yestDayStat: dayRevState.yestDayStat,
-                    ),
-                    LearnedDefsRefHost(state: defsState),
-                  ],
-                ),
-              );
-            },
-          );
-        },
+              },
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: TextEntryWidget(
+              onClickedAdd: (word) => _onAddNewWord(context, word),
+            ),
+          ),
+        ],
       ),
     );
   }
