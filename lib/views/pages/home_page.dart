@@ -16,6 +16,7 @@ import 'package:bag_of_words/data/repos/day_revision_repo.dart';
 import 'package:bag_of_words/data/repos/defs_repo.dart';
 import 'package:bag_of_words/res/app_color.dart';
 import 'package:bag_of_words/res/app_string.dart';
+import 'package:bag_of_words/views/pages/day_recall_page.dart';
 import 'package:bag_of_words/views/pages/login_page.dart';
 import 'package:bag_of_words/views/refhost/learned_defs_ref_host.dart';
 import 'package:bag_of_words/views/reps/day_revision_stat_rep.dart';
@@ -33,11 +34,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final User user = context.read<AuthRepo>().getAuthenticatedUser();
 
-    final DayRevisionRepo dayRevRepo = DayRevisionRepo(
-      user: user,
-      cloudProvider: DayRevisionCloudProvider(),
-    );
-
     final LearnedDefsBloc defsBloc = LearnedDefsBloc(
       DefsRepo(
         user: user,
@@ -45,19 +41,40 @@ class HomePage extends StatelessWidget {
       ),
     );
 
-    return MultiBlocProvider(
+    return MultiRepositoryProvider(
       providers: [
-        BlocProvider<DayRevisionSummaryBloc>(
-          create: (_) => DayRevisionSummaryBloc(dayRevRepo),
+        RepositoryProvider(
+          create: (_) => DayRevisionRepo(
+            user: user,
+            cloudProvider: DayRevisionCloudProvider(),
+          ),
         ),
-        BlocProvider<LearnedDefsBloc>(
-          create: (_) => defsBloc,
-        ),
-        BlocProvider<AddWordBloc>(
-          create: (_) => AddWordBloc(dayRevRepo, defsBloc),
+        RepositoryProvider(
+          create: (_) => DefsRepo(
+            user: user,
+            cloudProvider: DefsCloudProvider(),
+          ),
         ),
       ],
-      child: HomeScreen(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<DayRevisionSummaryBloc>(
+            create: (context) => DayRevisionSummaryBloc(
+              context.read<DayRevisionRepo>(),
+            ),
+          ),
+          BlocProvider<LearnedDefsBloc>(
+            create: (context) => defsBloc,
+          ),
+          BlocProvider<AddWordBloc>(
+            create: (context) => AddWordBloc(
+              context.read<DayRevisionRepo>(),
+              defsBloc,
+            ),
+          ),
+        ],
+        child: HomeScreen(),
+      ),
     );
   }
 }
@@ -158,6 +175,18 @@ class HomeScreenBody extends StatelessWidget {
         return DayRevisionStatRep(
           todaysDayStat: state.todaysDayStat,
           yestDayStat: state.yestDayStat,
+          onTapDayRevisionStat: (dayStat) {
+            if (dayStat == null || dayStat.total == 0) return;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => DayRecallPage(
+                  dayStat: dayStat,
+                  dayRevisionRepo: context.read<DayRevisionRepo>(),
+                ),
+              ),
+            );
+          },
         );
       },
     );
