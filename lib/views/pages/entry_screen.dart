@@ -27,9 +27,9 @@ class _EntryScreenState extends State<EntryScreen> {
       navigatorKey: _navigatorKey,
       title: AppString.appName,
       theme: ThemeData(
-        primaryColor: AppColor.darkBg,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        backgroundColor: AppColor.dark,
+        appBarTheme: AppBarTheme(
+          backgroundColor: AppColor.darkBg,
+        ),
       ),
       builder: (context, child) {
         return BlocListener<AuthBloc, AuthState>(
