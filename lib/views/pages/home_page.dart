@@ -20,6 +20,8 @@ import 'package:bag_of_words/views/pages/day_recall_page.dart';
 import 'package:bag_of_words/views/pages/login_page.dart';
 import 'package:bag_of_words/views/refhost/learned_defs_ref_host.dart';
 import 'package:bag_of_words/views/reps/day_revision_stat_rep.dart';
+import 'package:bag_of_words/views/widgets/app_bottom_sheet.dart';
+import 'package:bag_of_words/views/widgets/home_page_actions.dart';
 import 'package:bag_of_words/views/widgets/text_entry_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -129,7 +131,10 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(Icons.more_vert_rounded),
             onPressed: () {
-              // TODO: Implement logout option with bottom sheet
+              AppBottomSheet(
+                context: context,
+                child: HomePageActions(context.read<AuthRepo>()),
+              ).show();
             },
           ),
         ],
