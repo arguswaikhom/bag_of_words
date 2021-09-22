@@ -1,3 +1,4 @@
+import 'package:bag_of_words/res/app_style.dart';
 import 'package:bag_of_words/res/app_color.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +14,6 @@ class AppBottomSheet {
   });
 
   void show() {
-    const BorderRadius radius = const BorderRadius.all(Radius.circular(16));
-
     showModalBottomSheet<void>(
       backgroundColor: Colors.transparent,
       context: context,
@@ -23,7 +22,7 @@ class AppBottomSheet {
           margin: float ? EdgeInsets.all(16) : EdgeInsets.zero,
           decoration: BoxDecoration(
             borderRadius: float
-                ? radius
+                ? AppStyle.brCircular16
                 : BorderRadius.vertical(top: Radius.circular(16)),
             color: AppColor.dark2,
           ),
@@ -35,7 +34,7 @@ class AppBottomSheet {
                 height: 8,
                 width: 100,
                 decoration: BoxDecoration(
-                  borderRadius: radius,
+                  borderRadius: AppStyle.brCircular16,
                   color: AppColor.dark4,
                 ),
               ),

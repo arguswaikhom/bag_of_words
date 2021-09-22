@@ -1,7 +1,7 @@
 import 'package:bag_of_words/models/day_stat.dart';
 import 'package:bag_of_words/res/app_string.dart';
 import 'package:bag_of_words/utils/extensions/int_x.dart';
-import 'package:bag_of_words/widget/DayStatEntry.dart';
+import 'package:bag_of_words/views/widgets/day_stat_entry.dart';
 import 'package:flutter/material.dart';
 
 typedef OnTapDayRevisionStat = Function(DayStat?);

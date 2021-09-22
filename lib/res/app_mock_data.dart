@@ -1,4 +1,4 @@
-import 'package:bag_of_words/model/Definition.dart';
+import 'package:bag_of_words/models/definition.dart';
 
 class AppMockData {
   static String rowDefinition =
