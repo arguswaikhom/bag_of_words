@@ -1,6 +1,6 @@
 import 'package:bag_of_words/bloc/auth/auth_bloc.dart';
 import 'package:bag_of_words/data/repos/auth/auth_repo.dart';
-import 'package:bag_of_words/views/pages/entry_screen.dart';
+import 'package:bag_of_words/views/pages/entry_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +20,7 @@ class App extends StatelessWidget {
       value: authRepo,
       child: BlocProvider(
         create: (_) => AuthBloc(authRepo: authRepo),
-        child: EntryScreen(),
+        child: EntryPage(),
       ),
     );
   }

@@ -5,18 +5,18 @@ import 'package:bag_of_words/res/app_string.dart';
 import 'package:bag_of_words/utils/extensions/navigator_state_x.dart';
 import 'package:bag_of_words/views/pages/home_page.dart';
 import 'package:bag_of_words/views/pages/login_page.dart';
-import 'package:bag_of_words/views/pages/splash_screen.dart';
+import 'package:bag_of_words/views/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class EntryScreen extends StatefulWidget {
-  EntryScreen({Key? key}) : super(key: key);
+class EntryPage extends StatefulWidget {
+  EntryPage({Key? key}) : super(key: key);
 
   @override
-  _EntryScreenState createState() => _EntryScreenState();
+  _EntryPageState createState() => _EntryPageState();
 }
 
-class _EntryScreenState extends State<EntryScreen> {
+class _EntryPageState extends State<EntryPage> {
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
@@ -48,7 +48,7 @@ class _EntryScreenState extends State<EntryScreen> {
           child: child,
         );
       },
-      onGenerateRoute: (_) => SplashScreen.route(),
+      onGenerateRoute: (_) => SplashPage.route(),
     );
   }
 }
