@@ -27,6 +27,7 @@ class _EntryPageState extends State<EntryPage> {
       navigatorKey: _navigatorKey,
       title: AppString.appName,
       theme: ThemeData(
+        scaffoldBackgroundColor: AppColor.darkBg,
         appBarTheme: AppBarTheme(
           backgroundColor: AppColor.darkBg,
         ),

@@ -14,7 +14,6 @@ import 'package:bag_of_words/data/providers/defs_cloud_provider.dart';
 import 'package:bag_of_words/data/repos/auth/auth_repo.dart';
 import 'package:bag_of_words/data/repos/day_revision_repo.dart';
 import 'package:bag_of_words/data/repos/defs_repo.dart';
-import 'package:bag_of_words/res/app_color.dart';
 import 'package:bag_of_words/res/app_string.dart';
 import 'package:bag_of_words/views/pages/day_recall_page.dart';
 import 'package:bag_of_words/views/pages/login_page.dart';
@@ -122,7 +121,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     return Scaffold(
-      backgroundColor: AppColor.darkBg,
       appBar: AppBar(
         title: Text(AppString.appName),
         elevation: 0,

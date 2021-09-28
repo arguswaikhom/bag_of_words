@@ -1,3 +1,4 @@
-class AppAsset{
-  static const icon = "assets/icon/icon.png";
+class AppAsset {
+  static const iconSolid = 'assets/icon/icon-solid.png';
+  static const iconWordCloud = 'assets/icon/icon-word-cloud.png';
 }
