@@ -14,6 +14,7 @@ import 'package:bag_of_words/data/providers/defs_cloud_provider.dart';
 import 'package:bag_of_words/data/repos/auth/auth_repo.dart';
 import 'package:bag_of_words/data/repos/day_revision_repo.dart';
 import 'package:bag_of_words/data/repos/defs_repo.dart';
+import 'package:bag_of_words/res/app_color.dart';
 import 'package:bag_of_words/res/app_string.dart';
 import 'package:bag_of_words/views/pages/day_recall_page.dart';
 import 'package:bag_of_words/views/pages/login_page.dart';
@@ -25,6 +26,7 @@ import 'package:bag_of_words/views/widgets/text_entry_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -158,12 +160,20 @@ class HomeScreenBody extends StatelessWidget {
 
   void _onAddNewWord(BuildContext context, String word) {
     if (word.trim().isEmpty) {
-      // TODO: Empty word addition not allowed
+      Fluttertoast.showToast(
+        msg: AppString.enterAWord,
+        textColor: AppColor.dark,
+        backgroundColor: AppColor.light,
+      );
       return;
     }
 
     if (word.split(' ').length > 1) {
-      // TODO: Multiple word search not allowed
+      Fluttertoast.showToast(
+        msg: AppString.searchSingleWordOnly,
+        textColor: AppColor.dark,
+        backgroundColor: AppColor.light,
+      );
       return;
     }
 

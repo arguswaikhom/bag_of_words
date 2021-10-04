@@ -1,6 +1,7 @@
 import 'package:bag_of_words/bloc/auth/auth_bloc.dart';
 import 'package:bag_of_words/bloc/auth/auth_state.dart';
 import 'package:bag_of_words/data/repos/auth/auth_repo.dart';
+import 'package:bag_of_words/res/app_color.dart';
 import 'package:bag_of_words/res/app_string.dart';
 import 'package:bag_of_words/res/app_style.dart';
 import 'package:bag_of_words/views/pages/home_page.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -60,9 +62,12 @@ class _LoginScreenState extends State<LoginPage> {
                 onPressed: () async {
                   try {
                     await context.read<AuthRepo>().logIn();
-                  } catch (e) {
-                    print(e);
-                    // TODO: Nitify user that there is a login failure
+                  } catch (_) {
+                    Fluttertoast.showToast(
+                      msg: AppString.failedToSignIn,
+                      textColor: AppColor.dark,
+                      backgroundColor: AppColor.light,
+                    );
                   }
                 },
               ),
