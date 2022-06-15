@@ -1,19 +1,8 @@
 # bag_of_words
 
-A new Flutter project.
+Bag of words app was developed to improve your English language vocabulary. It'll help you learn more English words in a smart way. You can use this app as a simple English language dictionary app but that's not all, it'll help you keep track of all the words that you've learned so far using the app. You can easily find what you have learned like all the words, their meaning and example sentences. You can also see how many words you've learned today, yesterday or any other day. Best of all Bag of words app will help you recall the words you've forgotten anytime, anywhere like a reliable pocket dictionary at your fingertips.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
 
 <table>
     <tbody>
