@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:bag_of_words/models/day_stat.dart';
-import 'package:bag_of_words/utils/enums/response_status.dart';
+import 'package:bag_of_words/utils/extensions/response_status.dart';
 
 class DayStatResponse {
   ResponseStatus status;

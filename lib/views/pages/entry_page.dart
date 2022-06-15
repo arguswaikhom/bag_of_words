@@ -24,6 +24,7 @@ class _EntryPageState extends State<EntryPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       navigatorKey: _navigatorKey,
       title: AppString.appName,
       theme: ThemeData(

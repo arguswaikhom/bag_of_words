@@ -4,7 +4,7 @@ import 'package:bag_of_words/models/day_stat_word.dart';
 import 'package:bag_of_words/models/definition.dart';
 import 'package:bag_of_words/res/app_color.dart';
 import 'package:bag_of_words/res/app_string.dart';
-import 'package:bag_of_words/utils/enums/action_word_action.dart';
+import 'package:bag_of_words/utils/extensions/action_word_action.dart';
 import 'package:bag_of_words/views/widgets/circle_widget.dart';
 import 'package:bag_of_words/views/widgets/definition_widget.dart';
 import 'package:flutter/material.dart';

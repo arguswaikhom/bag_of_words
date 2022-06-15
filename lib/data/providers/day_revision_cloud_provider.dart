@@ -2,7 +2,7 @@ import 'package:bag_of_words/data/response/day_stat_response.dart';
 import 'package:bag_of_words/models/day_stat.dart';
 import 'package:bag_of_words/models/definition.dart';
 import 'package:bag_of_words/res/app_string.dart';
-import 'package:bag_of_words/utils/enums/response_status.dart';
+import 'package:bag_of_words/utils/extensions/response_status.dart';
 import 'package:bag_of_words/utils/exceptions/empty_res_exception.dart';
 import 'package:bag_of_words/utils/exceptions/failed_res_exception.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -1,5 +1,5 @@
-import 'package:bag_of_words/bloc/home/learned_defs_event.dart';
-import 'package:bag_of_words/bloc/home/learned_defs_state.dart';
+import 'package:bag_of_words/bloc/learned_defs/learned_defs_event.dart';
+import 'package:bag_of_words/bloc/learned_defs/learned_defs_state.dart';
 import 'package:bag_of_words/data/repos/defs_repo.dart';
 import 'package:bag_of_words/data/response/defs_response.dart';
 import 'package:bag_of_words/models/definition.dart';
@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LearnedDefsBloc extends Bloc<LearnedDefsEvent, LearnedDefsState> {
   final DefsRepo defsRepo;
+
   LearnedDefsBloc(this.defsRepo) : super(const LearnedDefsState.initial());
 
   @override

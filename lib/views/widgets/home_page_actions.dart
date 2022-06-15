@@ -1,4 +1,4 @@
-import 'package:bag_of_words/data/repos/auth/auth_repo.dart';
+import 'package:bag_of_words/data/repos/auth_repo.dart';
 import 'package:bag_of_words/res/app_color.dart';
 import 'package:flutter/material.dart';
 

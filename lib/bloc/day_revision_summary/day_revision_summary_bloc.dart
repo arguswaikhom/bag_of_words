@@ -1,5 +1,5 @@
-import 'package:bag_of_words/bloc/home/day_revision_summary_event.dart';
-import 'package:bag_of_words/bloc/home/day_revision_summary_state.dart';
+import 'package:bag_of_words/bloc/day_revision_summary/day_revision_summary_event.dart';
+import 'package:bag_of_words/bloc/day_revision_summary/day_revision_summary_state.dart';
 import 'package:bag_of_words/data/repos/day_revision_repo.dart';
 import 'package:bag_of_words/models/day_stat.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

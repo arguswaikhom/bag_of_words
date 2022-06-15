@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bag_of_words/utils/enums/action_word_action.dart';
+import 'package:bag_of_words/utils/extensions/action_word_action.dart';
 
 class ActionWord {
   String word;

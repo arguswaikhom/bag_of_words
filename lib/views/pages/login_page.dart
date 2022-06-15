@@ -1,6 +1,6 @@
 import 'package:bag_of_words/bloc/auth/auth_bloc.dart';
 import 'package:bag_of_words/bloc/auth/auth_state.dart';
-import 'package:bag_of_words/data/repos/auth/auth_repo.dart';
+import 'package:bag_of_words/data/repos/auth_repo.dart';
 import 'package:bag_of_words/res/app_color.dart';
 import 'package:bag_of_words/res/app_string.dart';
 import 'package:bag_of_words/res/app_style.dart';
